@@ -45,6 +45,10 @@ function! s:UpdateGrayout()
 endfunction
 
 function! s:ClearGrayout()
+    if !exists('b:num_grayout_lines')
+        let b:num_grayout_lines = 0
+    endif
+
     python sys.argv = ["clear"]
     execute 'pyfile'.s:pyscript
 endfunction
