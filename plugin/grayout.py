@@ -162,7 +162,7 @@ class Plugin(object):
             for i in range(b.linebegin + 1, b.lineend):
                 signid = self._basesignid + self._numgrayouts
                 printdebug("Creating grayout {} in line {}".format(signid, i))
-                vim.command("sign place {} line={} name=PreprocessorGrayout file={}".format(
+                vim.command("sign place {} line={} name=PreprocessorGrayout priority=5 file={}".format(
                     signid, i, vim.current.buffer.name))
                 self._numgrayouts += 1
             lastblock = b
