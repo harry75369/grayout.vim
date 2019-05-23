@@ -16,7 +16,8 @@ else
 
     let s:pyscript = expand('<sfile>:p:h').'/grayout.py'
 
-    highlight PreprocessorGrayout cterm=italic gui=italic ctermfg=DarkGray guifg=DarkGray
+    "highlight PreprocessorGrayout cterm=italic gui=italic ctermfg=DarkGray guifg=DarkGray
+    highlight link PreprocessorGrayout Comment
     sign define PreprocessorGrayout linehl=PreprocessorGrayout
 
     command! GrayoutUpdate call s:UpdateGrayout()
