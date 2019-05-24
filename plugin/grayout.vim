@@ -18,7 +18,8 @@ else
 
     "highlight PreprocessorGrayout cterm=italic gui=italic ctermfg=DarkGray guifg=DarkGray
     highlight link PreprocessorGrayout Comment
-    sign define PreprocessorGrayout text=| texthl=PreprocessorGrayout linehl=PreprocessorGrayout
+    highlight PreprocessorGrayoutSignColumn ctermfg=245 ctermbg=237 guifg=#928374 guibg=#3c3836
+    sign define PreprocessorGrayout text=| texthl=PreprocessorGrayoutSignColumn linehl=PreprocessorGrayout
 
     command! GrayoutUpdate call s:UpdateGrayout()
     command! GrayoutClear call s:ClearGrayout()
