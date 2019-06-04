@@ -11,6 +11,8 @@ import sys
 debug = int(vim.eval("g:grayout_debug"))
 debug_file = int(vim.eval("g:grayout_debug_logfile"))
 
+version = sys.version_info
+python3 = True if version.major == 3 else False
 
 def printdebug(*args):
     text = " ".join([ str(i) for i in args ])
@@ -80,6 +82,9 @@ class Parser(object):
         if int(vim.eval("g:grayout_debug_compiler_inout")):
             printdebug("\nCompiler input:\n", code)
 
+        if python3:
+            code = code.encode()
+
         out, err = p.communicate(code)
         self._parseTags(out)
 
@@ -99,7 +104,7 @@ class Parser(object):
     def _parseTags(self, text):
         r = re.compile(str(self._uuid) + r" n=(\d+) begin=(\d+) end=(\d+)")
         for i in text.splitlines():
-            m = r.match(i.strip())
+            m = r.match(i.strip().decode('utf-8') if python3 else i.strip())
             if m:
                 self._blocks[int(m.group(1))].active = True
 

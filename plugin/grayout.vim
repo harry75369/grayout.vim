@@ -1,4 +1,4 @@
-if !has('python')
+if !has('python') && !has('python3')
     echoerr 'This plugin requires python.'
     finish
 endif
@@ -25,7 +25,11 @@ else
     command! GrayoutClear call s:ClearGrayout()
     command! GrayoutReloadConfig call s:ReloadGrayoutConfig()
 
-    python import sys
+    if has('python')
+      python import sys
+    elseif has('python3')
+      python3 import sys
+    endif
 endif
 
 function! s:UpdateGrayout()
@@ -41,8 +45,13 @@ function! s:UpdateGrayout()
         call s:ReloadGrayoutConfig()
     endif
 
-    python sys.argv = ["grayout"]
-    execute 'pyfile'.s:pyscript
+    if has('python')
+      python sys.argv = ["grayout"]
+      execute 'py3'.s:pyscript
+    elseif has('python3')
+      python3 sys.argv = ["grayout"]
+      execute 'py3file'.s:pyscript
+    endif
 endfunction
 
 function! s:ClearGrayout()
@@ -50,11 +59,21 @@ function! s:ClearGrayout()
         let b:num_grayout_lines = 0
     endif
 
-    python sys.argv = ["clear"]
-    execute 'pyfile'.s:pyscript
+    if has('python')
+      python sys.argv = ["clear"]
+      execute 'pyfile'.s:pyscript
+    elseif has('python3')
+      python3 sys.argv = ["clear"]
+      execute 'py3file'.s:pyscript
+    endif
 endfunction
 
 function! s:ReloadGrayoutConfig()
-    python sys.argv = ["config"]
-    execute 'pyfile'.s:pyscript
+    if has('python')
+      python sys.argv = ["config"]
+      execute 'pyfile'.s:pyscript
+    elseif has('python3')
+      python3 sys.argv = ["config"]
+      execute 'py3file'.s:pyscript
+    endif
 endfunction
