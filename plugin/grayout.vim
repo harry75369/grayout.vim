@@ -47,7 +47,7 @@ function! s:UpdateGrayout()
 
     if has('python')
       python sys.argv = ["grayout"]
-      execute 'py3'.s:pyscript
+      execute 'pyfile'.s:pyscript
     elseif has('python3')
       python3 sys.argv = ["grayout"]
       execute 'py3file'.s:pyscript
