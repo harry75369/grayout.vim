@@ -120,6 +120,7 @@ class Parser(object):
                     self._addblock(n, enum)
                 if m.group(1).startswith("el") or m.group(1) == "endif":
                     return n
+        return -1
 
     def _addblock(self, n, enum):
         # Keep the blocks in ascending order
